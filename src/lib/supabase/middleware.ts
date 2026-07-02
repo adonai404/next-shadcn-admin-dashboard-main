@@ -14,6 +14,11 @@ export async function updateSession(request: NextRequest) {
   const env = getSupabaseEnv();
 
   if (!env) {
+    if (request.nextUrl.pathname.startsWith(PROTECTED_PREFIX)) {
+      const url = request.nextUrl.clone();
+      url.pathname = LOGIN_URL;
+      return NextResponse.redirect(url);
+    }
     return supabaseResponse;
   }
 

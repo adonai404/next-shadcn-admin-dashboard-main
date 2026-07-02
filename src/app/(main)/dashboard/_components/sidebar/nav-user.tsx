@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 
-import { CircleUser, CreditCard, EllipsisVertical, LogOut, MessageSquareDot } from "lucide-react";
+import { CircleUser, EllipsisVertical, LogOut, MessageSquareDot } from "lucide-react";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -80,10 +80,6 @@ export function NavUser({
               <DropdownMenuItem>
                 <CircleUser />
                 Conta
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <CreditCard />
-                Cobrança
               </DropdownMenuItem>
               <DropdownMenuItem>
                 <MessageSquareDot />
