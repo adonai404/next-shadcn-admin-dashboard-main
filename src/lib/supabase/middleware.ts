@@ -2,7 +2,7 @@ import { type NextRequest, NextResponse } from "next/server";
 
 import { createServerClient } from "@supabase/ssr";
 
-import { SUPABASE_PUBLISHABLE_KEY, SUPABASE_URL } from "./env";
+import { getSupabaseEnv } from "./env";
 
 const PROTECTED_PREFIX = "/dashboard";
 const AUTH_PREFIX = "/auth/v2";
@@ -11,8 +11,13 @@ const HOME_URL = "/dashboard/nfe-analysis";
 
 export async function updateSession(request: NextRequest) {
   let supabaseResponse = NextResponse.next({ request });
+  const env = getSupabaseEnv();
 
-  const supabase = createServerClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
+  if (!env) {
+    return supabaseResponse;
+  }
+
+  const supabase = createServerClient(env.url, env.publishableKey, {
     cookies: {
       getAll() {
         return request.cookies.getAll();
